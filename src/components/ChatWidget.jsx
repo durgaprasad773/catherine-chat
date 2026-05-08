@@ -76,7 +76,9 @@ export function ChatWidget() {
       setSessionId(sid);
       return sid;
     } catch {
-      return null;
+      const fallbackId = `session-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+      setSessionId(fallbackId);
+      return fallbackId;
     }
   };
 
