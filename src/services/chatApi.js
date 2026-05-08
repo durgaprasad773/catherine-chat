@@ -131,7 +131,10 @@ export async function insertUserChatSession(userIP, chatbotId) {
   const response = await fetch(`${API_URLS.dotnetApi}/UserChatSession_Widget/Insert`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ UserIP: userIP }),
+    JSON.stringify({
+   IPAddress: userIP,
+   SessionStartTime: new Date().toISOString(),
+}),
   });
 
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
