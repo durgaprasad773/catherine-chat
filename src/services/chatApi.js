@@ -11,7 +11,7 @@ export const WIDGET_ID = '9a03793a-a5f2-40d9-9a16-c553e0267ec9';
 export async function fetchImprovedChatResponse(message, sessionId, chatbotId = null, apiBaseUrl = '') {
   const requestPayload = {
     message: message,
-    session_id: sessionId,
+    session_id: sessionId ?? '',
     index_name: 'default',
   };
 
@@ -124,7 +124,7 @@ export async function fetchUserIP() {
 export async function insertUserChatSession(userIP, chatbotId) {
   const headers = {
     'Content-Type': 'application/json',
-    accept: 'application/json',
+    accept: 'text/plain',
   };
   if (chatbotId) headers['x-widget-key'] = chatbotId;
 
@@ -138,6 +138,33 @@ export async function insertUserChatSession(userIP, chatbotId) {
   });
 
   if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-  const data = await response.json();
-  return data.SessionId || data.sessionId || data;
+  const sessionId = await response.text();
+  return sessionId.trim();
+}
+
+// Send email
+export async function sendEmail(name, email, message, chatbotId = null) {
+  const requestPayload = {
+    Name: name,
+    ContactPersonEmail: email,
+    Message: message,
+  };
+
+  const headers = {
+    'Content-Type': 'application/json',
+    accept: 'application/json',
+  };
+
+  if (chatbotId) {
+    headers['x-widget-key'] = chatbotId;
+  }
+
+  const response = await fetch(`${API_URLS.dotnetApi}/SendAnEmail_Widget/SendMail`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(requestPayload),
+  });
+
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return response.text();
 }

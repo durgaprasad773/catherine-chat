@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChatMessage } from './ChatMessage';
 import { TypingIndicator } from './TypingIndicator';
+import { CTAButtons } from './CTAButtons';
+import { EmailFormModal } from './EmailFormModal';
 import {
   WIDGET_ID,
   fetchImprovedChatResponse,
@@ -35,6 +37,14 @@ export function ChatWidget() {
   const [welcomeMessage, setWelcomeMessage] = useState(DEFAULT_WELCOME);
   const [headerName, setHeaderName] = useState("Ask Dr Catherine's Assistant");
   const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [brandColour, setBrandColour] = useState('#86356e');
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [ctaConfig, setCtaConfig] = useState({
+    bookNowShow: false, bookNowText: '', bookNowUrl: '',
+    sendEmailShow: false, sendEmailText: '',
+    ctaTwoShow: false, ctaTwoText: '', ctaTwoUrl: '',
+    ctaThreeShow: false, ctaThreeText: '', ctaThreeUrl: ''
+  });
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -54,6 +64,20 @@ export function ChatWidget() {
       if (settings?.IntroMessage) setWelcomeMessage(settings.IntroMessage);
       if (settings?.ClinicName)   setHeaderName(settings.ClinicName);
       if (settings?.LogoUrl)      setProfileImageUrl(settings.LogoUrl);
+      if (settings?.BrandColour)  setBrandColour(settings.BrandColour);
+      setCtaConfig({
+        bookNowShow: settings?.BookNowShow === 'True' || settings?.BookNowShow === true,
+        bookNowText: settings?.BookNowLabel || '',
+        bookNowUrl:  settings?.BookNowUrl || '',
+        sendEmailShow: settings?.SendAnEmailShow === 'True' || settings?.SendAnEmailShow === true,
+        sendEmailText: settings?.SendAnEmailLabel || '',
+        ctaTwoShow: settings?.CTATwoShow === 'True' || settings?.CTATwoShow === true,
+        ctaTwoText: settings?.CTATwoLabel || '',
+        ctaTwoUrl:  settings?.CTATwoUrl || '',
+        ctaThreeShow: settings?.CTAThreeShow === 'True' || settings?.CTAThreeShow === true,
+        ctaThreeText: settings?.CTAThreeLabel || '',
+        ctaThreeUrl:  settings?.CTAThreeUrl || ''
+      });
 
       const questions = await getStarterQuestions(WIDGET_ID);
       if (questions?.q1 || questions?.q2 || questions?.q3) {
@@ -180,6 +204,22 @@ export function ChatWidget() {
     }
   };
 
+  const handleBookNow = () => {
+    if (ctaConfig.bookNowUrl) window.open(ctaConfig.bookNowUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleSendEmail = () => {
+    setShowEmailForm(true);
+  };
+
+  const handleCTATwo = () => {
+    if (ctaConfig.ctaTwoUrl) window.open(ctaConfig.ctaTwoUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCTAThree = () => {
+    if (ctaConfig.ctaThreeUrl) window.open(ctaConfig.ctaThreeUrl, '_blank', 'noopener,noreferrer');
+  };
+
   const latestBotId = [...messages].reverse().find(m => m.sender === 'bot' && m.message_id)?.message_id;
 
   return (
@@ -254,6 +294,26 @@ export function ChatWidget() {
         </div>
 
         {/* Input row */}
+        <CTAButtons
+          bookNowShow={ctaConfig.bookNowShow}
+          bookNowText={ctaConfig.bookNowText}
+          bookNowUrl={ctaConfig.bookNowUrl}
+          sendEmailShow={ctaConfig.sendEmailShow}
+          sendEmailText={ctaConfig.sendEmailText}
+          ctaTwoShow={ctaConfig.ctaTwoShow}
+          ctaTwoText={ctaConfig.ctaTwoText}
+          ctaTwoUrl={ctaConfig.ctaTwoUrl}
+          ctaThreeShow={ctaConfig.ctaThreeShow}
+          ctaThreeText={ctaConfig.ctaThreeText}
+          ctaThreeUrl={ctaConfig.ctaThreeUrl}
+          onBookNow={handleBookNow}
+          onSendEmail={handleSendEmail}
+          onCTATwo={handleCTATwo}
+          onCTAThree={handleCTAThree}
+          brandColour={brandColour}
+        />
+
+        {/* Input row */}
         <div className="widget-input-row">
           <input
             ref={inputRef}
@@ -287,6 +347,13 @@ export function ChatWidget() {
       <div className="widget-foot">
         Educational information only · Not a substitute for professional advice, diagnosis, therapy or crisis support · Powered by <strong>NeuraScaleX</strong>
       </div>
+
+      <EmailFormModal
+        isOpen={showEmailForm}
+        onClose={() => setShowEmailForm(false)}
+        chatbotId={chatbotId}
+        brandColour={brandColour}
+      />
     </div>
   );
 }
