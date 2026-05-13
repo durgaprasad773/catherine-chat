@@ -17,13 +17,13 @@ export default function App() {
                 <span>R</span><span className="w">W</span>
               </div>
             </div>
-            <h1>Ask Dr Catherine's Assistant</h1>
+            <h1>Ask Dr Cathy</h1>
             <div className="credentials">Dr Catherine Sampa Muyeba · MBChB · MSc · FRCPsych · DipIBLM</div>
             <p className="subtitle">
-              A dedicated AI-powered front door for REAPing Women, Dr Catherine's YouTube, book, coaching,
-              speaking and clinical signposting — helping professional women recover, refocus and thrive.
+              A guided first conversation for high-achieving women who feel overwhelmed, stretched thin, or ready for a more purposeful next chapter.
+
             </p>
-            <div className="mission">✨ REAPing Women rise to their fullest potential and impact their world</div>
+            <div className="mission">✨ Ask questions, explore REAPing Women, and find your next step — the Busy Woman’s Quiz, free workbook, Life Audit, community, videos, or speaking enquiry.</div>
             <div className="badges" aria-label="Trust badges">
               <span className="badge magenta">REAPing Women Community</span>
               <span className="badge">Lifestyle Medicine</span>
@@ -37,7 +37,7 @@ export default function App() {
 
           {/* ── Primary CTAs ── */}
           <section className="feature-card">
-            <a className="primary-cta" href="https://community.cathymuyeba.com/invitation?code=84EDCF" target="_blank" rel="noopener noreferrer">
+            <a className="primary-cta" href="https://reaping-women.com/login" target="_blank" rel="noopener noreferrer">
               <div className="cta-icon">🌱</div>
               <div>
                 <div className="cta-title">Join the REAPing Women Community</div>
@@ -45,7 +45,7 @@ export default function App() {
               </div>
               <div className="arrow">→</div>
             </a>
-            <a className="primary-cta green-border" href="https://calendly.com/catherinemuyeba/90" target="_blank" rel="noopener noreferrer">
+            <a className="primary-cta green-border" href="https://calendly.com/catherinemuyeba/60" target="_blank" rel="noopener noreferrer">
               <div className="cta-icon">✨</div>
               <div>
                 <div className="cta-title">Book the REAP &amp; RISE Life Audit</div>
@@ -59,23 +59,7 @@ export default function App() {
           <div className="divider-title">Quick Links</div>
 
           <nav className="links" aria-label="Primary links">
-            <a className="link-card magenta" href="https://community.cathymuyeba.com/invitation?code=84EDCF" target="_blank" rel="noopener noreferrer">
-              <div className="link-icon">👥</div>
-              <div>
-                <div className="link-title">REAPing Women Community</div>
-                <div className="link-sub">Reflection, tools and guided conversations for professional women</div>
-              </div>
-              <div className="arrow">→</div>
-            </a>
-
-            <a className="link-card green" href="https://calendly.com/catherinemuyeba/90" target="_blank" rel="noopener noreferrer">
-              <div className="link-icon">🌿</div>
-              <div>
-                <div className="link-title">REAP &amp; RISE Life Audit</div>
-                <div className="link-sub">A focused personal reset for clarity, confidence and direction</div>
-              </div>
-              <div className="arrow">→</div>
-            </a>
+          
 
             <a className="link-card purple" href="https://youtu.be/5yHN7V6qgCw?si=ZpIChGIzO35V05YP" target="_blank" rel="noopener noreferrer">
               <div className="link-icon">▶️</div>
@@ -113,10 +97,10 @@ export default function App() {
               <div className="arrow">→</div>
             </a>
 
-            <a className="link-card" href="https://cathymuyeba.com/" target="_blank" rel="noopener noreferrer">
+            <a className="link-card" href="https://reapingwomen.com/" target="_blank" rel="noopener noreferrer">
               <div className="link-icon">🌐</div>
               <div>
-                <div className="link-title">Visit Dr Catherine's Website</div>
+                <div className="link-title">Visit Reaping Women Website</div>
                 <div className="link-sub">Services, media, framework, book and contact</div>
               </div>
               <div className="arrow">→</div>
@@ -149,7 +133,7 @@ export default function App() {
               podcast appearances, talks, email signature and WhatsApp — while the AI assistant guides visitors
               into the right next step.
             </p>
-            <a href="https://community.cathymuyeba.com/invitation?code=84EDCF" target="_blank" rel="noopener noreferrer">
+            <a href="https://reaping-women.com/login" target="_blank" rel="noopener noreferrer">
               Join the Community →
             </a>
           </section>
@@ -161,12 +145,12 @@ export default function App() {
               <div className="path">
                 <h3>I want to join a women's growth community</h3>
                 <p>For professional women who want structure, accountability and guided personal growth through the REAP &amp; RISE roadmap.</p>
-                <a href="https://community.cathymuyeba.com/invitation?code=84EDCF" target="_blank" rel="noopener noreferrer">Join REAPing Women →</a>
+                <a href="https://reaping-women.com/login" target="_blank" rel="noopener noreferrer">Join REAPing Women →</a>
               </div>
               <div className="path">
                 <h3>I need a personal reset</h3>
                 <p>For women who want a focused life audit to reflect, clarify priorities and choose the next step with confidence.</p>
-                <a href="https://calendly.com/catherinemuyeba/90" target="_blank" rel="noopener noreferrer">Book REAP &amp; RISE Life Audit →</a>
+                <a href="https://calendly.com/catherinemuyeba/60" target="_blank" rel="noopener noreferrer">Book REAP &amp; RISE Life Audit →</a>
               </div>
               <div className="path">
                 <h3>I want mental health, ADHD or addictions signposting</h3>
@@ -225,7 +209,7 @@ export default function App() {
               <div className="proof">
                 <h3>REAPing Women Community</h3>
                 <p>Helping professional women recover, refocus and thrive through the REAP &amp; RISE roadmap.</p>
-                <a href="https://community.cathymuyeba.com/invitation?code=84EDCF" target="_blank" rel="noopener noreferrer">Community Route →</a>
+                <a href="https://reaping-women.com/login" target="_blank" rel="noopener noreferrer">Community Route →</a>
               </div>
               <div className="proof">
                 <h3>YouTube &amp; Thought Leadership</h3>
@@ -328,13 +312,13 @@ export default function App() {
             <a href="https://youtu.be/5yHN7V6qgCw?si=ZpIChGIzO35V05YP" target="_blank" rel="noopener noreferrer">YouTube</a>
             <a href="https://www.instagram.com/drcathymuyeba?igsh=MWJiYTdwZGcwempwaA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.tiktok.com/@drcathymuyeba" target="_blank" rel="noopener noreferrer">TikTok</a>
-            <a href="https://cathymuyeba.com/" target="_blank" rel="noopener noreferrer">Website</a>
+            <a href="https://reapingwomen.com/" target="_blank" rel="noopener noreferrer">Website</a>
             <a href="https://reapingwomen.com/contact" target="_blank" rel="noopener noreferrer">Contact</a>
           </nav>
 
           {/* ── Footer ── */}
           <footer>
-            © Dr Catherine Muyeba · REAPing Women · AI page by <strong>HR Digital Media / NeuraScaleX</strong>
+            © Dr Catherine Muyeba · REAPing Women · Powered by<a href="https://neurascalex.com/" target="_blank" rel="noopener noreferrer"> <strong>NeuraScaleX</strong></a>
             <br />
             Educational information only. Not a substitute for professional advice, diagnosis, therapy or crisis support.
             Clinical services should always be accessed through the appropriate clinical provider or booking pathway.
