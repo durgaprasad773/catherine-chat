@@ -345,7 +345,7 @@ export function ChatWidget() {
 
       {/* Footer */}
       <div className="widget-foot">
-        Educational information only · Not a substitute for professional advice, diagnosis, therapy or crisis support · Powered by <strong>NeuraScaleX</strong>
+        Educational information only · Not a substitute for professional advice, diagnosis, therapy or crisis support · Powered by <strong><a href="https://neurascalex.com" target="_blank" rel="noopener noreferrer">NeuraScaleX</a></strong>
       </div>
 
       <EmailFormModal
