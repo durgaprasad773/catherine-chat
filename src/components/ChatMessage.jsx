@@ -1,7 +1,7 @@
 import React from 'react';
 import { parseMarkdown } from '../utils/helpers';
 
-export function ChatMessage({ message, isLatestBot, onReaction }) {
+export function ChatMessage({ message, isLatestBot, onReaction, profileImageUrl, botName }) {
   const isUser = message.sender === 'user';
 
   if (isUser) {
@@ -18,10 +18,21 @@ export function ChatMessage({ message, isLatestBot, onReaction }) {
   return (
     <div className="msg-bot-wrapper">
       <div className="bot-label">
-        <div className="bot-icon">
-          <span>CM</span>
+        <div className="bot-icon" style={{ padding: 0, overflow: 'hidden' }}>
+          {profileImageUrl ? (
+            <img
+              src={profileImageUrl}
+              alt={botName || 'Assistant'}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '999px' }}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextSibling.style.display = 'flex';
+              }}
+            />
+          ) : null}
+          <span style={{ display: profileImageUrl ? 'none' : 'flex' }}>DC</span>
         </div>
-        <span className="bot-name-tag">Ask Dr Catherine's Assistant</span>
+        <span className="bot-name-tag">{botName || 'Ask Cathy Assistant'}</span>
       </div>
 
       <div

@@ -35,7 +35,7 @@ export function ChatWidget() {
   const [userIP, setUserIP] = useState('127.0.0.1');
   const [sessionId, setSessionId] = useState(null);
   const [welcomeMessage, setWelcomeMessage] = useState(DEFAULT_WELCOME);
-  const [headerName, setHeaderName] = useState("Ask Dr Catherine's Assistant");
+  const [headerName, setHeaderName] = useState("Ask Cathy Assistant");
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [brandColour, setBrandColour] = useState('#86356e');
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -228,10 +228,18 @@ export function ChatWidget() {
       <div className="widget-head">
         <div className="assistant-id">
           {profileImageUrl ? (
-            <img src={profileImageUrl} alt={headerName} className="assistant-avatar" style={{ padding: 0, objectFit: 'cover' }} />
-          ) : (
-            <div className="assistant-avatar">CM</div>
-          )}
+            <img
+              src={profileImageUrl}
+              alt={headerName}
+              className="assistant-avatar"
+              style={{ padding: 0, objectFit: 'cover' }}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextSibling.style.display = 'flex';
+              }}
+            />
+          ) : null}
+          <div className="assistant-avatar" style={{ display: profileImageUrl ? 'none' : 'flex' }}>DC</div>
           <div>
             <div className="assistant-name">{headerName}</div>
             <div className="online">
@@ -264,6 +272,8 @@ export function ChatWidget() {
                 message={msg}
                 isLatestBot={isLatestBot}
                 onReaction={handleReaction}
+                profileImageUrl={profileImageUrl}
+                botName={headerName}
               />
             );
           })}
