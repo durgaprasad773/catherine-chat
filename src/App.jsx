@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChatWidget } from './components/ChatWidget';
+import { getClinicSettings, WIDGET_ID } from './services/chatApi';
 
 export default function App() {
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
+
+  useEffect(() => {
+    getClinicSettings(WIDGET_ID)
+      .then(s => { if (s?.LogoUrl) setProfileImageUrl(s.LogoUrl); })
+      .catch(() => {});
+  }, []);
+
   const scrollToAssistant = () => {
     const el = document.getElementById('ask-assistant');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -18,9 +27,17 @@ export default function App() {
           {/* ── Hero ── */}
           <header className="hero">
             <div className="logo-wrap" aria-label="REAPing Women logo">
-              <div className="rw-logo">
-                <span>R</span><span className="w">W</span>
-              </div>
+              {profileImageUrl ? (
+                <img
+                  src={profileImageUrl}
+                  alt="Dr Catherine's assistant"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '999px' }}
+                />
+              ) : (
+                <div className="rw-logo">
+                  <span>R</span><span className="w">W</span>
+                </div>
+              )}
             </div>
             <h1>Ask Dr Cathy</h1>
             <div className="credentials">Dr Catherine Sampa Muyeba · MBChB · MSc · FRCPsych · DipIBLM</div>
