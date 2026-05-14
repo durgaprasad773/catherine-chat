@@ -199,19 +199,19 @@ export default function App() {
             <div className="reap-grid">
               <div className="reap-item">
                 <h3>Reflect</h3>
-                <p>Pause honestly. Notice what is working, what is draining you and what needs attention.</p>
+                <p>Where Am I Really?</p>
               </div>
               <div className="reap-item">
-                <h3>Empower</h3>
-                <p>Rebuild confidence, self-leadership and the belief that change is possible.</p>
+                <h3>Envision</h3>
+                <p>Who Am I Becoming?</p>
               </div>
               <div className="reap-item">
-                <h3>Align</h3>
-                <p>Reconnect decisions, habits and goals with the life and impact you truly want.</p>
+                <h3>Analyse</h3>
+                <p>What’s In My Way?</p>
               </div>
               <div className="reap-item">
-                <h3>Produce</h3>
-                <p>Take grounded action so your personal, professional and leadership life becomes fruitful.</p>
+                <h3>Plan</h3>
+                <p>How To Make The Move</p>
               </div>
             </div>
           </section>
