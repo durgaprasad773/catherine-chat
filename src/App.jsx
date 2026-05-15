@@ -222,7 +222,7 @@ export default function App() {
               </div>
               <div className="reap-item">
                 <h3>Sustain</h3>
-                <p>Taking One Action At A Time</p>
+                <p>Building the Resilience Bank</p>
               </div>
               <div className="reap-item">
                 <h3>Enjoy</h3>
@@ -237,7 +237,7 @@ export default function App() {
             <p>
               Dr Catherine Muyeba is a Regional Lead Consultant Psychiatrist with extensive experience across
               hospitals, community and prisons. She is also a Lifestyle Psychiatrist, Adult ADHD and addictions
-              expert, coach, speaker, author and founder of REAPing Women.
+              expert, coach, speaker, No.1 bestselling author and founder of REAPing Women.
             </p>
           </section>
 
