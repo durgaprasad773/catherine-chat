@@ -193,8 +193,7 @@ export default function App() {
           <section className="card">
             <h2>The REAP &amp; RISE Roadmap</h2>
             <p style={{ marginBottom: '14px' }}>
-              A practical framework to help high-achieving women transform emotionally, professionally and
-              personally — moving from reflection to action with clarity and purpose.
+              The REAP & RISE Framework guides professional women from self-awareness to purposeful celebration, ensuring growth is intentional, sustainable, and joyful.
             </p>
             <div className="reap-grid">
               <div className="reap-item">
@@ -212,6 +211,22 @@ export default function App() {
               <div className="reap-item">
                 <h3>Plan</h3>
                 <p>How To Make The Move</p>
+              </div>
+              <div className="reap-item">
+                <h3>Reset</h3>
+                <p>Rooting Before Rising</p>
+              </div>
+              <div className="reap-item">
+                <h3>Implement</h3>
+                <p>Taking One Action At A Time</p>
+              </div>
+              <div className="reap-item">
+                <h3>Sustain</h3>
+                <p>Taking One Action At A Time</p>
+              </div>
+              <div className="reap-item">
+                <h3>Enjoy</h3>
+                <p>How To Celebrate Every Moment</p>
               </div>
             </div>
           </section>
@@ -397,7 +412,7 @@ export default function App() {
         >
           💬
         </span>
-        <span style={{ whiteSpace: 'nowrap' }}>Ask Cathy</span>
+        <span style={{ whiteSpace: 'nowrap' }}>Ask Dr Cathy</span>
       </button>
     </>
   );
