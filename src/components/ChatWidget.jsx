@@ -11,6 +11,7 @@ import {
   getStarterQuestions,
   fetchUserIP,
   insertUserChatSession,
+  trackButtonClick,
 } from '../services/chatApi';
 
 const API_BASE_URL = 'https://neurax-python-be-emhfejathhhpe6h3.uksouth-01.azurewebsites.net';
@@ -39,6 +40,7 @@ export function ChatWidget() {
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [brandColour, setBrandColour] = useState('#86356e');
   const [showEmailForm, setShowEmailForm] = useState(false);
+  const [bookNowClicksId, setBookNowClicksId] = useState(null);
   const [ctaConfig, setCtaConfig] = useState({
     bookNowShow: false, bookNowText: '', bookNowUrl: '',
     sendEmailShow: false, sendEmailText: '',
@@ -204,11 +206,24 @@ export function ChatWidget() {
     }
   };
 
-  const handleBookNow = () => {
+  const handleBookNow = async () => {
+    if (sessionId) {
+      try {
+        const clickId = await trackButtonClick(sessionId, ctaConfig.bookNowText, chatbotId);
+        if (clickId) setBookNowClicksId(clickId);
+      } catch {}
+    }
     if (ctaConfig.bookNowUrl) window.open(ctaConfig.bookNowUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async () => {
+    const sid = await ensureSession();
+    if (sid && ctaConfig.sendEmailText) {
+      try {
+        const clickId = await trackButtonClick(sid, ctaConfig.sendEmailText, chatbotId);
+        if (clickId) setBookNowClicksId(clickId.trim());
+      } catch {}
+    }
     setShowEmailForm(true);
   };
 
@@ -363,6 +378,7 @@ export function ChatWidget() {
         onClose={() => setShowEmailForm(false)}
         chatbotId={chatbotId}
         brandColour={brandColour}
+        bookNowClicksId={bookNowClicksId}
       />
     </div>
   );
