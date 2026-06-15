@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { sendEmail } from '../services/chatApi';
 
-export function EmailFormModal({ isOpen, onClose, chatbotId, brandColour, bookNowClicksId }) {
+export function EmailFormModal({ isOpen, onClose, brandColour, bookNowClicksId }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -21,7 +21,7 @@ export function EmailFormModal({ isOpen, onClose, chatbotId, brandColour, bookNo
     }
     setIsLoading(true);
     try {
-      await sendEmail(formData.name, formData.email, formData.message, chatbotId, bookNowClicksId);
+      await sendEmail(formData.name, formData.email, formData.message, null, bookNowClicksId);
       setShowSuccess(true);
       setTimeout(() => {
         onClose();

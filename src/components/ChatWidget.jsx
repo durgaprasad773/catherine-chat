@@ -4,7 +4,6 @@ import { TypingIndicator } from './TypingIndicator';
 import { CTAButtons } from './CTAButtons';
 import { EmailFormModal } from './EmailFormModal';
 import {
-  WIDGET_ID,
   fetchImprovedChatResponse,
   saveReaction,
   getClinicSettings,
@@ -33,7 +32,6 @@ export function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [showStarters, setShowStarters] = useState(true);
   const [starterQuestions, setStarterQuestions] = useState(DEFAULT_STARTER_QUESTIONS);
-  const [chatbotId] = useState(WIDGET_ID);
   const [userIP, setUserIP] = useState('127.0.0.1');
   const [widgetWebUrlId, setWidgetWebUrlId] = useState(null);
   const [sessionId, setSessionId] = useState(null);
@@ -71,7 +69,7 @@ export function ChatWidget() {
         setWidgetWebUrlId(registration.WidgetWebUrlId);
       }
 
-      const settings = await getClinicSettings(WIDGET_ID);
+      const settings = await getClinicSettings();
       if (settings?.IntroMessage) setWelcomeMessage(settings.IntroMessage);
       if (settings?.ClinicName)   setHeaderName(settings.ClinicName);
       if (settings?.LogoUrl)      setProfileImageUrl(settings.LogoUrl);
@@ -90,7 +88,7 @@ export function ChatWidget() {
         ctaThreeUrl:  settings?.CTAThreeUrl || ''
       });
 
-      const questions = await getStarterQuestions(WIDGET_ID);
+      const questions = await getStarterQuestions();
       if (questions?.q1 || questions?.q2 || questions?.q3) {
         const qs = [
           questions.q1 && { q: questions.q1, a: questions.a1, url: questions.Url1, label: questions.ButtonLabel1 },
@@ -107,7 +105,7 @@ export function ChatWidget() {
   const ensureSession = async () => {
     if (sessionId) return sessionId;
     try {
-      const sid = await insertUserChatSession(userIP, chatbotId, widgetWebUrlId);
+      const sid = await insertUserChatSession(userIP, null, widgetWebUrlId);
       setSessionId(sid);
       return sid;
     } catch {
@@ -128,7 +126,7 @@ export function ChatWidget() {
     setIsLoading(true);
 
     try {
-      const res = await fetchImprovedChatResponse(msg, sid, chatbotId, API_BASE_URL);
+      const res = await fetchImprovedChatResponse(msg, sid, null, API_BASE_URL);
       setMessages(prev => [
         ...prev,
         {
@@ -174,7 +172,7 @@ export function ChatWidget() {
     } else {
       setIsLoading(true);
       try {
-        const res = await fetchImprovedChatResponse(item.q, sid, chatbotId, API_BASE_URL);
+        const res = await fetchImprovedChatResponse(item.q, sid, null, API_BASE_URL);
         setMessages(prev => [
           ...prev,
           {
@@ -207,7 +205,7 @@ export function ChatWidget() {
       prev.map(m => m.message_id === messageId ? { ...m, userReaction: newReaction } : m)
     );
     try {
-      await saveReaction(msgSessionId, messageId, newReaction, chatbotId, API_BASE_URL);
+      await saveReaction(msgSessionId, messageId, newReaction, null, API_BASE_URL);
     } catch {
       setMessages(prev =>
         prev.map(m => m.message_id === messageId ? { ...m, userReaction: current.userReaction } : m)
@@ -218,7 +216,7 @@ export function ChatWidget() {
   const handleBookNow = async () => {
     if (sessionId) {
       try {
-        const clickId = await trackButtonClick(sessionId, ctaConfig.bookNowText, chatbotId);
+        const clickId = await trackButtonClick(sessionId, ctaConfig.bookNowText);
         if (clickId) setBookNowClicksId(clickId);
       } catch {}
     }
@@ -229,7 +227,7 @@ export function ChatWidget() {
     const sid = await ensureSession();
     if (sid && ctaConfig.sendEmailText) {
       try {
-        const clickId = await trackButtonClick(sid, ctaConfig.sendEmailText, chatbotId);
+        const clickId = await trackButtonClick(sid, ctaConfig.sendEmailText);
         if (clickId) setBookNowClicksId(clickId.trim());
       } catch {}
     }
@@ -385,7 +383,6 @@ export function ChatWidget() {
       <EmailFormModal
         isOpen={showEmailForm}
         onClose={() => setShowEmailForm(false)}
-        chatbotId={chatbotId}
         brandColour={brandColour}
         bookNowClicksId={bookNowClicksId}
       />

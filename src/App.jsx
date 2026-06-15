@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ChatWidget } from './components/ChatWidget';
-import { getClinicSettings, WIDGET_ID } from './services/chatApi';
+import { getClinicSettings, initializeWidget } from './services/chatApi';
 
 export default function App() {
   const [profileImageUrl, setProfileImageUrl] = useState(null);
 
   useEffect(() => {
-    getClinicSettings(WIDGET_ID)
+    // Initialize widget with dynamic configuration
+    initializeWidget().catch(error => {
+      console.error('Failed to initialize widget:', error);
+    });
+
+    // Fetch clinic settings
+    getClinicSettings()
       .then(s => { if (s?.LogoUrl) setProfileImageUrl(s.LogoUrl); })
       .catch(() => {});
   }, []);
